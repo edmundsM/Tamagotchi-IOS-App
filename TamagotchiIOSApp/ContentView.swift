@@ -8,9 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    var tamagotchi = Tamagotchi()
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ZStack {
+            Image("74707")
+            Image("Egg")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 400, height: 400, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            Rectangle()
+                .foregroundColor(.white)
+                .frame(width: 200, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            Circle()
+                .foregroundColor(.red)
+                .frame(width: 50, height: 50)
+            Text(tamagotchi.returnStats())
+            Button("Feed", action: {
+                tamagotchi.eat()
+                
+            })
+        }
     }
 }
 
