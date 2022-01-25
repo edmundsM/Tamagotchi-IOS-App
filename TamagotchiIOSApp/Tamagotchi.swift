@@ -7,15 +7,20 @@
 
 import Foundation
 
-class Tamagotchi {
-    var hunger : Int
-    var thirst : Int
-    var health : Int
+class Tamagotchi: ObservableObject {
+    @Published var hunger : Int
+    @Published var thirst : Int
+    @Published var health : Int
+    @Published var happiness: Int
+    @Published var age : Int
+    var timeElapsed : Double
     
     init() {
         self.hunger = 10
         self.thirst = 10
         self.health = 7
+        self.happiness = 5
+        self.age = 0
     }
     
     func eat() {
@@ -32,13 +37,34 @@ class Tamagotchi {
         }
     }
     
-    func returnStats() -> String{
+    func playAGame() {
+        if hunger < 5 && thirst < 5 {
+            if happiness < 10 {
+                if happiness < 9 {
+                    happiness += 2
+                } else {
+                    happiness += 1
+                }
+            }
+        }
+    }
+    
+    func ageIncrease() {
+        timeElapsed += 0.1
+        age = Int(self.timeElapsed)
+    }
+    
+    
+    
+    func returnStats() -> String {
         return """
         Tamagotchi Stats
-        ----------------
+        ------------------
         Hunger : \(hunger)
         Thirst : \(thirst)
         Health : \(health)
+        Happiness : \(happiness)
+        Age : \(age)
             
         """
     }

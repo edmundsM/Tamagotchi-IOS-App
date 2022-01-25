@@ -8,28 +8,38 @@
 import SwiftUI
 
 struct ContentView: View {
-    var tamagotchi = Tamagotchi()
+    
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @StateObject private var tamagotchi = Tamagotchi()
+    
+    
+    
+    
     var body: some View {
-        ZStack {
-            Image("74707")
-            Image("Egg")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 400, height: 400, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-            Rectangle()
-                .foregroundColor(.white)
-                .frame(width: 200, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-            Circle()
-                .foregroundColor(.red)
-                .frame(width: 50, height: 50)
+        VStack {
+            Spacer()
             Text(tamagotchi.returnStats())
-            Button("Feed", action: {
-                tamagotchi.eat()
-                
-            })
+            Text(tamagotchi.age)
+                .onReceive(timer) {_ in
+                    tamagotchi.ageIncrease()
+                }
+            Spacer()
+            HStack {
+                Button("Feed", action: {
+                    tamagotchi.eat()
+                })
+                Button("Water", action: {
+                    tamagotchi.drink()
+                })
+                Button("Game", action: {
+                    tamagotchi.playAGame()
+                })
+            }
+            Spacer()
         }
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
