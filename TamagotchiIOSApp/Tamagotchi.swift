@@ -21,6 +21,7 @@ class Tamagotchi: ObservableObject {
         self.health = 7
         self.happiness = 5
         self.age = 0
+        self.timeElapsed = 0.0
     }
     
     func eat() {
@@ -50,7 +51,7 @@ class Tamagotchi: ObservableObject {
     }
     
     func ageIncrease() {
-        timeElapsed += 0.1
+        timeElapsed += 0.05
         age = Int(self.timeElapsed)
     }
     
@@ -58,8 +59,6 @@ class Tamagotchi: ObservableObject {
     
     func returnStats() -> String {
         return """
-        Tamagotchi Stats
-        ------------------
         Hunger : \(hunger)
         Thirst : \(thirst)
         Health : \(health)

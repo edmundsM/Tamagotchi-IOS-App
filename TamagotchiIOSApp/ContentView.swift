@@ -17,14 +17,16 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Spacer()
-            Text(tamagotchi.returnStats())
-            Text(tamagotchi.age)
-                .onReceive(timer) {_ in
-                    tamagotchi.ageIncrease()
-                }
-            Spacer()
-            HStack {
+            Form {
+                Rectangle()
+                    .frame(width: 330, height: 330, alignment: .center)
+                
+            }
+            Form {
+                Text(tamagotchi.returnStats())
+                    .onReceive(timer) {_ in
+                        tamagotchi.ageIncrease()
+                    }
                 Button("Feed", action: {
                     tamagotchi.eat()
                 })
@@ -35,7 +37,6 @@ struct ContentView: View {
                     tamagotchi.playAGame()
                 })
             }
-            Spacer()
         }
     }
 }
